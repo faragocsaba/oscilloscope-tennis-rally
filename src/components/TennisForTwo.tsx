@@ -133,6 +133,7 @@ export function TennisForTwo() {
         <div className="flex flex-col items-center gap-2 pt-2 text-panel-label">
           <div className="text-xs tracking-[0.3em]">RALLY</div>
           <div className="font-mono text-2xl text-phosphor">{String(rally).padStart(2, "0")}</div>
+          <button className="panel-btn" onClick={() => setMoon((m) => !m)}>
             G: {moon ? "MOON" : "EARTH"}
           </button>
         </div>
