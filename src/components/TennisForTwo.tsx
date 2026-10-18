@@ -120,7 +120,7 @@ export function TennisForTwo() {
   );
 
   return (
-    <div className="flex flex-col items-center gap-6">
+    <div className="flex flex-col items-center gap-3">
       <div className="scope-bezel">
         <div className="scope-screen">
           <canvas ref={canvasRef} className="h-full w-full" aria-label="Oscilloscope tennis court" />
@@ -128,11 +128,11 @@ export function TennisForTwo() {
           <div className="scope-glass" />
         </div>
       </div>
-      <div className="flex flex-wrap items-start justify-center gap-6">
+      <div className="flex flex-wrap items-start justify-center gap-4">
         <Panel side="left" label="PLAYER 1" keys="A / D aim · S hit" />
-        <div className="flex flex-col items-center gap-3 pt-4 text-panel-label">
+        <div className="flex flex-col items-center gap-2 pt-2 text-panel-label">
           <div className="text-xs tracking-[0.3em]">RALLY</div>
-          <div className="font-mono text-3xl text-phosphor">{String(rally).padStart(2, "0")}</div>
+          <div className="font-mono text-2xl text-phosphor">{String(rally).padStart(2, "0")}</div>
           <button className="panel-btn" onClick={() => setMoon((m) => !m)}>
             G: {moon ? "MOON" : "EARTH"}
           </button>
