@@ -1,24 +1,30 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { TennisForTwo } from "@/components/TennisForTwo";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Tennis for Two — 1958 Oscilloscope Game" },
+      { name: "description", content: "Play Higinbotham's 1958 Tennis for Two on a glowing green oscilloscope screen. Two players, one keyboard." },
+      { property: "og:title", content: "Tennis for Two — 1958 Oscilloscope Game" },
+      { property: "og:description", content: "The first video game for fun, recreated with phosphor-glow oscilloscope graphics." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <main className="lab-bg flex min-h-screen flex-col items-center gap-6 px-4 py-8">
+      <header className="text-center">
+        <h1 className="font-mono text-2xl tracking-[0.4em] text-panel-label">TENNIS FOR TWO</h1>
+        <p className="mt-1 font-mono text-xs tracking-[0.3em] text-muted-foreground">
+          BROOKHAVEN NATIONAL LABORATORY · 1958
+        </p>
+      </header>
+      <TennisForTwo />
+    </main>
   );
 }
