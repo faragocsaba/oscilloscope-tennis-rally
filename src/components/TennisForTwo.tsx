@@ -120,7 +120,7 @@ export function TennisForTwo() {
   );
 
   return (
-    <div className="flex flex-col items-center gap-6">
+    <div className="flex flex-col items-center gap-3">
       <div className="scope-bezel">
         <div className="scope-screen">
           <canvas ref={canvasRef} className="h-full w-full" aria-label="Oscilloscope tennis court" />

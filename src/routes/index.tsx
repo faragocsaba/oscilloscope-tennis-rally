@@ -17,10 +17,10 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <main className="lab-bg flex min-h-screen flex-col items-center gap-6 px-4 py-8">
+    <main className="lab-bg flex min-h-screen flex-col items-center gap-3 px-4 py-4">
       <header className="text-center">
-        <h1 className="font-mono text-2xl tracking-[0.4em] text-panel-label">TENNIS FOR TWO</h1>
-        <p className="mt-1 font-mono text-xs tracking-[0.3em] text-muted-foreground">
+        <h1 className="font-mono text-xl tracking-[0.35em] text-panel-label">TENNIS FOR TWO</h1>
+        <p className="mt-0.5 font-mono text-[10px] tracking-[0.3em] text-muted-foreground">
           BROOKHAVEN NATIONAL LABORATORY · 1958
         </p>
       </header>
