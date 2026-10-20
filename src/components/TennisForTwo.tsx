@@ -90,7 +90,7 @@ export function TennisForTwo() {
       ctx.shadowBlur = 8;
       for (let i = 0; i < trail.length - 1; i++) {
         const t = (i + 1) / trail.length;
-        const [x0, y0] = trail[i], [x1, y1] = trail[i + 1];
+        const [x0, y0] = trail[i]!, [x1, y1] = trail[i + 1]!;
         if (Math.hypot(x1 - x0, y1 - y0) > 60) continue; // skip serve jumps
         ctx.globalAlpha = 0.5 * t * t * flick;
         ctx.lineWidth = 1 + 2 * t;
