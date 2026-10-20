@@ -48,6 +48,7 @@ export function TennisForTwo() {
 
     ctx.fillStyle = "#000"; ctx.fillRect(0, 0, S, S);
     let last = performance.now(), acc = 0, raf = 0, shownRally = -1;
+    const trail: [number, number][] = [];
     const dt = 1 / 240;
 
     const loop = (now: number) => {
@@ -82,17 +83,24 @@ export function TennisForTwo() {
       const [nx, ny] = toPx(0, NET_HEIGHT);
       ctx.moveTo(nx, gy); ctx.lineTo(nx, ny);
       ctx.stroke();
-      // ball
+      // fading trail along the path the beam travelled
       const [bx, by] = toPx(st.ball.x, st.ball.y);
-      ctx.globalAlpha = flick; ctx.shadowBlur = 18;
-      ctx.beginPath(); ctx.arc(bx, by, 3.2, 0, Math.PI * 2); ctx.fill();
-      // aim line for player whose side the ball is on
-      const p = sideOf(st.ball.x);
-      const a = anglesRef.current[p], dir = p === "left" ? 1 : -1;
-      ctx.globalAlpha = 0.35 * flick; ctx.lineWidth = 1.5; ctx.shadowBlur = 6;
-      ctx.beginPath(); ctx.moveTo(bx, by);
-      ctx.lineTo(bx + Math.cos(a) * 34 * dir, by - Math.sin(a) * 34);
-      ctx.stroke();
+      trail.push([bx, by]);
+      if (trail.length > 28) trail.shift();
+      ctx.shadowBlur = 8;
+      for (let i = 0; i < trail.length - 1; i++) {
+        const t = (i + 1) / trail.length;
+        const [x0, y0] = trail[i], [x1, y1] = trail[i + 1];
+        if (Math.hypot(x1 - x0, y1 - y0) > 60) continue; // skip serve jumps
+        ctx.globalAlpha = 0.5 * t * t * flick;
+        ctx.lineWidth = 1 + 2 * t;
+        ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x1, y1); ctx.stroke();
+      }
+      // vivid beam point
+      ctx.globalAlpha = 1; ctx.shadowBlur = 22;
+      ctx.beginPath(); ctx.arc(bx, by, 3.6, 0, Math.PI * 2); ctx.fill();
+      ctx.shadowBlur = 8; ctx.fillStyle = "#eaffef";
+      ctx.beginPath(); ctx.arc(bx, by, 1.6, 0, Math.PI * 2); ctx.fill();
       ctx.globalAlpha = 1; ctx.shadowBlur = 0;
       raf = requestAnimationFrame(loop);
     };
